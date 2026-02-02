@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Be My Valentine 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.25);
+      padding: 28px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      position: relative;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      min-width: 110px;
+      touch-action: manipulation;
+    }
+
+    #yes {
+      background: #2ecc71;
+      color: white;
+      z-index: 2;
+    }
+
+    #no {
+      background: #e74c3c;
+      color: white;
+      position: relative;
+      transition: transform 0.25s ease;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Hey Love 💕</h1>
+    <p>
+      From my heart to this screen...<br />
+      Will you be my Valentine?
+    </p>
+
+    <div class="buttons">
+      <button id="yes">Yes 😍</button>
+      <button id="no">No 😜</button>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+
+    function moveNoButton() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = vw / 2 - btnRect.width;
+      const maxY = vh / 2 - btnRect.height;
+
+      const x = (Math.random() * maxX * 2) - maxX;
+      const y = (Math.random() * maxY * 2) - maxY;
+
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    const isMobile =
+      /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // 📱 Mobile → move on touch
+      noBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        moveNoButton();
+      });
+    } else {
+      // 💻 Desktop → move on hover
+      noBtn.addEventListener("mouseenter", moveNoButton);
+    }
+
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = `
+        <div style="
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          background: linear-gradient(135deg, #ff4d6d, #ff758f);
+          color: white;
+          font-family: Arial;
+          text-align: center;
+          padding: 20px;
+        ">
+          <h1>YAYYYY 💖</h1>
+          <p>You just made me the happiest person alive 😍</p>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
